@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login aplikasi</title>
+	<title>Login Aplikasi</title>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
   <script type="text/javascript">
   $('#login-button').click(function(){
@@ -53,20 +53,20 @@ $.when.apply(null, promises).done(function () {
   if($pesan=="gagal")
   {
     echo"<script type='text/javascript'>
-      alert('Username or password not valid');
+      alert('Username atau Password tidak sesuai!');
     </script>";
   }
   else if($pesan=="berhasil")
   {
     echo"<script type='text/javascript'>
-      alert('Anda berhasil mendaftar, silahkan login!');
+      alert('Anda berhasil mendaftar. Silahkan Login');
     </script>";
 
      }
   else if($pesan=="a")
   {
     echo"<script type='text/javascript'>
-      alert('Anda harus melakukan LOGIN terlebih dahulu sebelum melakukan pemesanan');
+      alert('Anda harus melakukan Login terlebih dahulu sebelum melakukan pemesanan');
     </script>";
 
       }
@@ -75,11 +75,11 @@ $.when.apply(null, promises).done(function () {
 <body>
 <div class="vid-container">
   <video id="Video1" class="bgvid back" autoplay="false" muted="muted" preload="auto" loop>
-      <source src="video/milky-way-river-1280hd.mp4.mp4" type="video/mp4">
+      <source src="video/bg-video.mp4" type="video/mp4">
   </video>
   <div class="inner-container">
     <video id="Video2" class="bgvid inner" autoplay="false" muted="muted" preload="auto" loop>
-      <source src="video/milky-way-river-1280hd.mp4.mp4" type="video/mp4">
+      <source src="video/bg-video.mp4" type="video/mp4">
     </video>
     <div class="box">
       <h1>Silahkan Login</h1>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2023 at 06:30 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Feb 21, 2024 at 08:34 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,47 +32,14 @@ CREATE TABLE `admin` (
   `nama` varchar(100) NOT NULL,
   `username` varchar(60) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id_admin`, `nama`, `username`, `password`) VALUES
-(1, 'Anis Rohmadi', 'admin', 'admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `buku`
---
-
-CREATE TABLE `buku` (
-  `id_buku` int(11) NOT NULL,
-  `id_ketegori` int(11) NOT NULL,
-  `judul` varchar(50) NOT NULL,
-  `gambar` text NOT NULL,
-  `penerbit` varchar(100) NOT NULL,
-  `pengarang` varchar(100) NOT NULL,
-  `halaman` varchar(5) NOT NULL,
-  `harga` varchar(10) NOT NULL,
-  `stok` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `buku`
---
-
-INSERT INTO `buku` (`id_buku`, `id_ketegori`, `judul`, `gambar`, `penerbit`, `pengarang`, `halaman`, `harga`, `stok`) VALUES
-(11, 11, ' PKN', '20170217164334.jpg', '  PT. Sapi Bentong', 'Bang Bokep', ' 100', ' 1000000', '68'),
-(22, 22, 'B. Inggris', '20170217164457.jpg', 'CV. Kurang Ngondol', 'Atok', '200', '2000000', '53'),
-(33, 33, 'Kimia', '20170217164635.png', 'Firma Kurang Belaian', 'Nopal', '10', '500000', '0'),
-(44, 44, 'PHP', '20170217164739.jpg', 'CV. nguntul', 'abdul', '100', '5000000', '23'),
-(55, 55, 'Bisnis Online', '20170217164900.jpg', 'PT. Sok Ganteng', 'yahya', '10', '100000', '50'),
-(66, 22, ' Base COC', '20170217202459.jpg', ' PT. Kurang Turu', ' prof. Ir. Dr. Diko s.kom', ' 20', ' 99000000', '52'),
-(77, 33, 'Sistem Operasi', '20170221040107.jpg', 'smk al kh', 'guru', '100', '200000', '40'),
-(88, 22, 'Desain Grafis', '20170221040253.jpg', 'Pt. morak marek', 'sayonggg', '50', '100000', '15'),
-(89, 56, 'Iqro', '20220915201057.jpg', 'Kompas', 'H. Samiun', '50', '45000', '8');
+(1, 'Terresa Alicia', 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -88,14 +55,7 @@ CREATE TABLE `chekout` (
   `nomor_tlp` varchar(20) NOT NULL,
   `tanggal` varchar(20) NOT NULL,
   `status_terima` enum('belum di terima','sudah diterima') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `chekout`
---
-
-INSERT INTO `chekout` (`id_chekout`, `id_pembeli`, `nama`, `alamat`, `nomor_tlp`, `tanggal`, `status_terima`) VALUES
-(24, 30, 'Anis Rohmadi M.Kom.', 'Jl. Lurus Sekali No.1 Jakarta', '5345353', '02-09-2023', 'sudah diterima');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -108,15 +68,14 @@ CREATE TABLE `customer` (
   `nama` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id_pembeli`, `nama`, `username`, `password`) VALUES
-(11, 'Pembeli1', 'Pembeli1', 'Pembeli1'),
-(30, 'Anis Baswedan', 'admin2', 'admin2');
+(44, 'Jhon Smith', 'customer', 'customer');
 
 -- --------------------------------------------------------
 
@@ -127,18 +86,17 @@ INSERT INTO `customer` (`id_pembeli`, `nama`, `username`, `password`) VALUES
 CREATE TABLE `kategori` (
   `id_ketegori` int(11) NOT NULL,
   `kategori` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_ketegori`, `kategori`) VALUES
-(11, 'Pendidikan'),
-(22, 'Tehnologi Informatika'),
-(33, 'Kewirausahaan'),
-(44, 'Sistem Informasi'),
-(56, 'Religi'),
+(11, 'Kesehatan'),
+(22, 'Furniture'),
+(33, 'Aksesoris'),
+(44, 'Kebutuhan Dapur'),
 (57, 'Lainnya');
 
 -- --------------------------------------------------------
@@ -150,21 +108,60 @@ INSERT INTO `kategori` (`id_ketegori`, `kategori`) VALUES
 CREATE TABLE `keranjang` (
   `id_keranjang` int(11) NOT NULL,
   `id_pembeli` int(11) NOT NULL,
-  `id_buku` int(11) NOT NULL,
+  `id_produk` int(11) NOT NULL,
   `qty` varchar(50) NOT NULL,
   `harga` varchar(50) NOT NULL,
   `total_harga` varchar(50) NOT NULL,
   `total_bayar` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `keranjang`
 --
 
-INSERT INTO `keranjang` (`id_keranjang`, `id_pembeli`, `id_buku`, `qty`, `harga`, `total_harga`, `total_bayar`) VALUES
+INSERT INTO `keranjang` (`id_keranjang`, `id_pembeli`, `id_produk`, `qty`, `harga`, `total_harga`, `total_bayar`) VALUES
 (38, 11, 33, '44', '500000', '22000000', ''),
-(42, 22, 44, '5', '5000000', '25000000', ''),
-(47, 30, 89, '2', '45000', '90000', '');
+(42, 22, 44, '5', '5000000', '25000000', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produk`
+--
+
+CREATE TABLE `produk` (
+  `id_produk` int(11) NOT NULL,
+  `id_ketegori` int(11) NOT NULL,
+  `kode_barang` varchar(50) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `harga_beli` decimal(10,2) NOT NULL,
+  `harga` decimal(10,2) DEFAULT NULL,
+  `berat` int(11) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `gambar` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id_produk`, `id_ketegori`, `kode_barang`, `nama_barang`, `harga_beli`, `harga`, `berat`, `stok`, `gambar`) VALUES
+(11, 11, 'BRG001', 'Minyak Kayu Putih', 12000.00, 15000.00, 1000, 5, '20240212050208.jpg'),
+(12, 22, 'BRG002', 'Kursi Kayu', 75000.00, 100000.00, 200, 5, '20240212050403.jpg'),
+(90, 11, 'BRG003', 'Sakatonik Botol ', 20000.00, 25000.00, 210, 21, '20240207082522.jpeg'),
+(91, 11, 'BRG004', 'Antangin Sachet', 4000.00, 5500.00, 15, 10, '20240207082617.jpg'),
+(92, 11, 'BRG005', 'Decolgen Obat Pilek', 1500.00, 2500.00, 15, 12, '20240207082730.jpg'),
+(93, 44, 'BRG006', 'Dispenser Air ', 60000.00, 90000.00, 1000, 8, '20240212043907.jpg'),
+(94, 44, 'BRG007', 'Oven Listrik Kirin', 390000.00, 500000.00, 1500, 3, '20240207083618.jpeg'),
+(95, 44, 'BRG008', 'Teflon Anti Lengket', 99000.00, 200000.00, 600, 5, '20240207083700.jpg'),
+(96, 44, 'BRG009', 'Wajan Anti Lengket', 85000.00, 150000.00, 600, 5, '20240212050230.jpeg'),
+(97, 22, 'BRG010', 'Meja Kayu Bulat', 80000.00, 120000.00, 800, 2, '20240207083839.jpg'),
+(98, 22, 'BRG011', 'Meja Plastik Napolly', 75000.00, 120000.00, 500, 2, '20240207083913.jpg'),
+(99, 22, 'BRG012', 'Kursi Plastik', 60000.00, 90000.00, 400, 2, '20240207084030.jpg'),
+(100, 33, 'BRG013', 'Tas Ransel Sekolah', 120000.00, 180000.00, 600, 3, '20240212050250.jpg'),
+(101, 33, 'BRG014', 'Totebag Karakter ', 15000.00, 20000.00, 300, 3, '20240212050306.jpeg'),
+(102, 33, 'BRG015', 'Totebag Hitam Segitiga', 30000.00, 45000.00, 400, 3, '20240207084231.jpg'),
+(103, 33, 'BRG016', 'Jam Tangan Wanita', 125000.00, 160000.00, 300, 3, '20240212050322.jpg');
 
 --
 -- Indexes for dumped tables
@@ -175,12 +172,6 @@ INSERT INTO `keranjang` (`id_keranjang`, `id_pembeli`, `id_buku`, `qty`, `harga`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
-
---
--- Indexes for table `buku`
---
-ALTER TABLE `buku`
-  ADD PRIMARY KEY (`id_buku`);
 
 --
 -- Indexes for table `chekout`
@@ -207,6 +198,12 @@ ALTER TABLE `keranjang`
   ADD PRIMARY KEY (`id_keranjang`);
 
 --
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id_produk`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -214,37 +211,37 @@ ALTER TABLE `keranjang`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `buku`
---
-ALTER TABLE `buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `chekout`
 --
 ALTER TABLE `chekout`
-  MODIFY `id_chekout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_chekout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id_pembeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_pembeli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_ketegori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_ketegori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

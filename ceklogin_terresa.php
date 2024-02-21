@@ -1,5 +1,5 @@
 <?php
-include"config_terresa.php";
+include "config_terresa.php";
 $username = $_POST['username'];
 $password = $_POST['password'];
 $ceklogin = mysqli_query($conn,"select * from admin where username='$username' && password='$password'");
@@ -9,7 +9,7 @@ $data = mysqli_fetch_assoc($ceklogin);
 $cekuser = $data['username'];
 $cekuser_cus = $datacus['username'];
 $nama_cus = $datacus['nama'];
-$nama = $data['nama'];
+$nama = $data['nama']; 
 $id = $datacus['id_pembeli'];
 if($cekuser==$username)
 {

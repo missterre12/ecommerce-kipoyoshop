@@ -1,33 +1,33 @@
 <?php
-include"../../conn_terresa.php";
+include "../../conn_terresa.php";
 $id_pembeli = $_SESSION['id_pembeli'];
-$qry = mysqli_query($conn,"SELECT * from keranjang where id_pembeli='$id_pembeli'");
+$qry = mysqli_query($conn,"SELECT * FROM keranjang where id_pembeli='$id_pembeli'");
 @$aksi = $_GET['aksi'];
 if($aksi=="hapus"){
 	$id_keranjang = $_GET['id'];
-	$query_qty = mysqli_query($conn,"SELECT * from keranjang where id_keranjang='$id_keranjang'");
+	$query_qty = mysqli_query($conn,"SELECT * FROM keranjang where id_keranjang='$id_keranjang'");
 	$data_qty = mysqli_fetch_assoc($query_qty);
 	$qty = $data_qty['qty'];
-	$id_buku = $data_qty['id_buku'];
-	$query_buku = mysqli_query($conn,"SELECT * from buku where id_buku='$id_buku'");
+	$id_produk = $data_qty['id_produk'];
+	$query_buku = mysqli_query($conn,"SELECT * FROM produk where id_produk='$id_produk'");
 	$data_buku = mysqli_fetch_assoc($query_buku);
 	$stok = $data_buku['stok'];
 	$stok_ubah = $stok+$qty;
-	mysqli_query($conn,"UPDATE buku set stok='$stok_ubah' where id_buku='$id_buku'");
-	mysqli_query($conn,"DELETE from keranjang where id_keranjang='$id_keranjang'");
-	header("location:detail_terresa.php?page=keranjang");
+	mysqli_query($conn,"UPDATE produk set stok='$stok_ubah' where id_produk='$id_produk'");
+	mysqli_query($conn,"DELETE FROM keranjang where id_keranjang='$id_keranjang'");
+	header("location:detail.php?page=keranjang");
 }
 ?>
 <div class="jumbotron">
 <table class="table table-bordered">
-	<th>Judul buku</th><th>Harga</th><th>QTY</th><th>Total Harga</th><th>Aksi</th>
+	<th>Nama Barang</th><th>Harga</th><th>QTY</th><th>Total Harga</th><th>Aksi</th>
 	<?php while($keranjang=mysqli_fetch_assoc($qry)){?>
 		<tr>
 		<td><?php
-		$q = mysqli_query($conn,"SELECT * from buku where id_buku='$keranjang[id_buku]'");
+		$q = mysqli_query($conn,"SELECT * FROM produk where id_produk='$keranjang[id_produk]'");
 		$d = mysqli_fetch_assoc($q);
-		$judul = $d['judul']; echo $judul;
-		$qbyar = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(total_harga) as total_bayar from keranjang where id_pembeli='$id_pembeli'"));
+		$nama_barang = $d['nama_barang']; echo $nama_barang;
+		$qbyar = mysqli_fetch_assoc(mysqli_query($conn,"SELECT SUM(total_harga) as total_bayar FROM keranjang where id_pembeli='$id_pembeli'"));
 		$bayar = $qbyar['total_bayar'];
 		?></td>
 		<td><?php echo $keranjang['harga'] ?></td>
@@ -38,7 +38,7 @@ if($aksi=="hapus"){
 <?php } ?>
 <tr>
 	<td colspan="3"><b>Total Bayar</b></td><td><?php echo @$bayar;  ?></td>
-	<td><center><a href="detail_terresa.php?aksi=checkout" class="btn btn-info">checkout</a></center></td>
+	<td><center><a href="detail.php?aksi=checkout" class="btn btn-info">checkout</a></center></td>
 </tr>
 </table>
 </div>

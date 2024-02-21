@@ -1,5 +1,5 @@
 <?php
-include"conn_terresa.php";
+include "conn_terresa.php";
 $nama = $_POST['nama'];
 $username = $_POST['username'];
 $password = $_POST['password'];
